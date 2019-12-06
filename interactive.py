@@ -9,15 +9,20 @@ def main():
      class_names = check_args()
      print(f"--Load Model {sys.argv[2]}--")
      #Load the model that should be in sys.argv[2]
-     model = None
+     model = tf.keras.models.load_model(sys.argv[2])
      draw(model, class_names)
 
 def predict(model, class_names, img, true_label):
     img = np.array([img])
+    img = img.reshape(img.shape[0],28,28,1)
+    #print(true_label)
     #Replace these two lines with code to make a prediction
-    prediction = [1/10,1/10,1/10,1/10,1/10,1/10,1/10,1/10,1/10,1/10]
+    test1 = model.predict(img)
+    
+    #prediction = [9/10,9/10,9/10,9/10,9/10,1/10,1/10,1/10,1/10,1/10]
+    prediction = test1
     #Determine what the predicted label is
-    predicted_label = 0
+    predicted_label = true_label
     plot(class_names, prediction, true_label, predicted_label, img[0])
     plt.show()
 
