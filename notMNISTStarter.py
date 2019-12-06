@@ -25,6 +25,10 @@ print("--Make model--")
 model = tf.keras.models.Sequential([
   tf.keras.layers.Conv2D(28,kernel_size=3,padding='same',activation='relu',input_shape = input_shape),
   tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+  tf.keras.layers.Conv2D(28,kernel_size=3,padding='same',activation='relu',input_shape = input_shape),
+  tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+  tf.keras.layers.Conv2D(28,kernel_size=3,padding='same',activation='relu',input_shape = input_shape),
+  tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
   tf.keras.layers.Flatten(),
   tf.keras.layers.Dense(128, activation='relu'),
   tf.keras.layers.Dense(10, activation='softmax')
@@ -32,7 +36,7 @@ model = tf.keras.models.Sequential([
 model.compile(optimizer='sgd', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 print("--Fit model--")
-model.fit(x_train, y_train, epochs=6, verbose=2)
+model.fit(x_train, y_train, epochs=8, verbose=2)
 
 print("--Evaluate model--")
 model_loss, model_acc = model.evaluate(x_test,  y_test, verbose=2)
