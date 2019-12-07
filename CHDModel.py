@@ -46,7 +46,7 @@ show_batch(test_X)
 test_Y = get_dataset("heart_test.csv",select_columns=LABEL_COL)
 show_batch(test_Y)
 
-example_batch = next(iter(train_X)) 
+'''example_batch = next(iter(train_X)) 
 
 packed_dataset = test_X.map(pack)
 
@@ -54,20 +54,19 @@ for features, labels in packed_dataset.take(1):
   print(features.numpy())
   print()
   print(labels.numpy())
+'''
 
-
-'''model = tf.keras.models.Sequential([
-  tf.keras.layers.Conv1D(28,kernel_size=3,padding='same',activation='relu',input_shape = 9),
-  tf.keras.layers.MaxPooling1D(pool_size=3),
+model = tf.keras.models.Sequential([
+  tf.keras.layers.Conv1D(28,kernel_size=3,padding='same',activation='relu',input_shape = (8,1)),
+  tf.keras.layers.MaxPooling1D(pool_size=2),
   tf.keras.layers.Flatten(),
   tf.keras.layers.Dense(128, activation='relu'),
+  tf.keras.layers.Dropout(0.3),
   tf.keras.layers.Dense(2, activation='softmax')
-
-  #tf.keras.layers.Flatten(input_shape=(28, 28))
-  #tf.keras.layers.Dense(10, activation='softmax'),
+  
   
 ])
-model.compile(optimizer='adam', loss='binaryCrossEntropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 print("--Fit model--")
 model.fit(train_X, train_Y, epochs=8, verbose=2)
@@ -78,4 +77,4 @@ print(f"Model Loss:    {model_loss:.2f}")
 print(f"Model Accuray: {model_acc*100:.1f}%")
 
 #Save Model
-model.save("MNIST.h5")'''
+model.save("CHDmodel.h5")

@@ -1,9 +1,5 @@
-#For Google Collab
-#try:
-#  # %tensorflow_version only exists in Colab.
-#  %tensorflow_version 2.x
-#except Exception:
-#  pass
+#Some of the ideas were taken from the source.
+#Source: https://www.kaggle.com/cdeotte/how-to-choose-cnn-architecture-mnist
 
 import tensorflow as tf
 import numpy as np
@@ -25,9 +21,9 @@ print("--Make model--")
 model = tf.keras.models.Sequential([
   tf.keras.layers.Conv1D(28,kernel_size=3,padding='same',activation='relu',input_shape = input_shape),
   tf.keras.layers.MaxPooling1D(pool_size=2),
-  tf.keras.layers.Conv1D(28,kernel_size=3,padding='same',activation='relu',input_shape = input_shape),
+  tf.keras.layers.Conv1D(28,kernel_size=3,padding='same',activation='relu',input_shape = (14,14)),
   tf.keras.layers.MaxPooling1D(pool_size=2),
-  tf.keras.layers.Conv1D(28,kernel_size=3,padding='same',activation='relu',input_shape = input_shape),
+  tf.keras.layers.Conv1D(28,kernel_size=3,padding='same',activation='relu',input_shape = (7,7)),
   tf.keras.layers.MaxPooling1D(pool_size=2),
   tf.keras.layers.Flatten(),
   tf.keras.layers.Dense(128, activation='relu'),

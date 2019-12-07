@@ -17,6 +17,7 @@ x_train, x_test = x_train / 255.0, x_test / 255.0
 
 input_shape = (28,28)
 print("--Make model--")
+#Source: https://www.kaggle.com/cdeotte/how-to-choose-cnn-architecture-mnist
 model = tf.keras.models.Sequential([
   tf.keras.layers.Conv1D(28,kernel_size=3,padding='same',activation='relu',input_shape = input_shape),
   tf.keras.layers.MaxPooling1D(pool_size=2),
