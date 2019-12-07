@@ -20,12 +20,18 @@ def main():
      print("Done")
 
 def predict(model, class_names, img, true_label):
-    img = np.array([img])
+    img = np.array([img],dtype=np.float16)
     #Replace these two lines with code to make a prediction
     test1 = model.predict(img).flatten()
     print(test1)
     #prediction = [9/10,9/10,9/10,9/10,9/10,1/10,1/10,1/10,1/10,1/10]
     prediction = test1
+    #Determine what the predicted label is
+    
+    maxele = prediction.argmax()
+    print(maxele)
+    predicted_label = class_names[maxele]
+
     plot(class_names, prediction, true_label, predicted_label, img[0])
     plt.show()
 

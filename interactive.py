@@ -17,12 +17,17 @@ def predict(model, class_names, img, true_label):
     #img = img.reshape(img.shape[0],28,28,1)
     #print(true_label)
     #Replace these two lines with code to make a prediction
-    test1 = model.predict(img).flatten()
+    test1 = model.predict(img)
+    test1 = test1.flatten()
     print(test1)
     #prediction = [9/10,9/10,9/10,9/10,9/10,1/10,1/10,1/10,1/10,1/10]
     prediction = test1
     #Determine what the predicted label is
-    predicted_label = true_label
+    
+    maxele = prediction.argmax()
+    print(maxele)
+    predicted_label = class_names[maxele]
+    
     plot(class_names, prediction, true_label, predicted_label, img[0])
     plt.show()
 

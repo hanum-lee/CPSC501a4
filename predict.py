@@ -15,16 +15,22 @@ def main():
           img = img/255
      img = 1 - img
      print(f"--Predict as Class {sys.argv[4]}--")
-     predict(model, class_names, img, int(sys.argv[4]))
+     
+     predict(model, class_names, img, sys.argv[4])
 
 def predict(model, class_names, img, true_label):
     img = np.array([img])
     test1 = model.predict(img).flatten()
     print(test1)
     #prediction = [9/10,9/10,9/10,9/10,9/10,1/10,1/10,1/10,1/10,1/10]
+    test1 = model.predict(img)
+    test1 = test1.flatten()
     prediction = test1
     #Determine what the predicted label is
-    predicted_label = true_label
+    
+    maxele = prediction.argmax()
+    print(maxele)
+    predicted_label = class_names[maxele]
     plot(class_names, prediction, true_label, predicted_label, img[0])
     plt.show()
 
@@ -59,9 +65,11 @@ def check_args():
           sys.exit(4)
      if not sys.argv[4].isdigit():
           print(f"{sys.argv[4]} is not an integer (0-9)")
-          sys.exit(3)
+          return class_names
+          #sys.exit(3)
      if int(sys.argv[4]) < 0 or int(sys.argv[4]) > 9 :
           print(f"{sys.argv[4]} is not an integer (0-9)")
+          print("That?")
           sys.exit(3)
      return class_names
 
